@@ -5,7 +5,7 @@ It is an intermediate layer for enabling communication between the server hostin
 
 ## Instructions
 
-1. Copy the `server-layer` folder to `/var/www/`. Rename it to `LDD_middle_layer`.
+1. Create a folder named `LDD_middle_layer` under `/var/www/`, and move the contents of this folder there.
 2. Copy `LDD_middle_layer.conf` to `/etc/apache2/sites-available/`.
 3. Make sure `flask` is installed. This runs on Python 2.7.
 4. Register the wsgi: `sudo a2ensite LDD_middle_layer`.
