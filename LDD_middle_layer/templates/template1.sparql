@@ -1,0 +1,31 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix WUR_ont: <http://www.wur.nl/purl/ontology#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix sio: <http://semanticscience.org/resource/>
+prefix to: <http://purl.obolibrary.org/obo/TO#>
+prefix WUR_acc: <http://www.wur.nl/purl/accession#>
+prefix dbp: <http://dbpedia.org/property/>
+prefix dbr: <http://dbpedia.org/resource/>
+prefix om: <http://def.seegrid.csiro.au/ontology/om/om-lite#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+select
+  (count(distinct ?acc) as ?number)
+  #distinct ?pVar ?pTitle
+where {
+  ?acc a WUR_ont:id .
+  ?orPlant WUR_ont:has_id ?acc .
+  ?desPlant WUR_ont:descendant_of ?orPlant .
+
+  ?obs a om:observation .
+  ?obs sio:SIO_000332 ?desPlant .
+  ?obs to:has_phenotype_variable ?trait .
+  ?trait a ?pVar .
+  ?trait dcterms:title ?pTitle .
+  ?trait to:has_phenotype_score ?pVal .
+
+  VALUES ?pTitle {"{{phenotypeVariable}}"} .
+  VALUES ?pVal {"{{phenotypeValue}}"} .
+  #values ?pTitle{"Fruit color" } .
+  #values ?pVal{"yellow"}
+}

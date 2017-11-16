@@ -1,0 +1,21 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix WUR_ont: <http://www.wur.nl/purl/ontology#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix sio: <http://semanticscience.org/resource/>
+prefix to: <http://purl.obolibrary.org/obo/TO#>
+prefix WUR_acc: <http://www.wur.nl/purl/accession#>
+prefix dbp: <http://dbpedia.org/property/>
+prefix dbr: <http://dbpedia.org/resource/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+select distinct
+    (?placeholder as ?url)
+    (?phenotypeValueURI as ?value)
+where {
+    ?exp a <http://purl.obolibrary.org/obo/AGRO_00000370> .
+    ?exp sio:SIO_000219 ?obsURI .
+    ?obsURI to:has_phenotype_variable ?traitURI  .
+    ?traitURI to:has_phenotype_score ?phenotypeValueURI .
+    ?traitURI dcterms:title ?traitTitle .
+    #filter (?traitTitle = ) .
+}

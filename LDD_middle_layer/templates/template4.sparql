@@ -1,0 +1,23 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix WUR_ont: <http://www.wur.nl/purl/ontology#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix sio: <http://semanticscience.org/resource/>
+prefix to: <http://purl.obolibrary.org/obo/TO#>
+prefix WUR_acc: <http://www.wur.nl/purl/accession#>
+prefix dbp: <http://dbpedia.org/property/>
+prefix dbr: <http://dbpedia.org/resource/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+select
+  distinct (?url as ?Accession)
+where {
+  ?acc a WUR_ont:id .
+  ?acc dcterms:title ?name .
+  ?orPlant WUR_ont:has_id ?acc .
+  bind(concat("<a href=\"", str(?acc), "\">", str(?name), "</a>") as ?url) .
+  ?desPlant WUR_ont:descendant_of ?orPlant .
+
+  ?exp <http://purl.obolibrary.org/obo/RO_0000057> ?desPlant .
+  ?exp dbp:location ?country .
+  VALUES ?country {<{{country}}>} .
+}
