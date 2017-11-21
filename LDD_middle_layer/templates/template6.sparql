@@ -29,7 +29,7 @@ where {
     ?obs to:has_phenotype_variable ?trait .
     ?trait a ?pVar .
     ?trait dcterms:title ?pTitle .
-    ?trait to:has_phenotype_score ?pVal .
+    ?obs to:has_phenotype_score ?pVal .
 
     VALUES ?country {<{{country}}>} .
     VALUES ?pTitle {"{{phenotypeVariable}}"} .

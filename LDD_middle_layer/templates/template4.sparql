@@ -20,4 +20,5 @@ where {
   ?exp <http://purl.obolibrary.org/obo/RO_0000057> ?desPlant .
   ?exp dbp:location ?country .
   VALUES ?country {<{{country}}>} .
+  # VALUES ?country {dbr:Netherlands} .
 }
